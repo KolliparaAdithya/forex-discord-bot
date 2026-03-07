@@ -6,6 +6,8 @@ from strategy import check_signal
 from risk_manager import can_take_trade, record_trade
 from session_filter import is_trading_session
 from stats import record_signal
+from stats import get_daily_stats
+from discord_bot import send_daily_report
 
 pairs = ["XAU/USD", "EUR/USD", "GBP/USD"]
 
@@ -84,3 +86,10 @@ print("===================================")
 send_bot_status()
 
 scan_market()
+now = datetime.datetime.utcnow()
+
+if now.hour == 23 and now.minute < 5:
+
+    signals, wins, losses = get_daily_stats()
+
+    send_daily_report(signals, wins, losses)
