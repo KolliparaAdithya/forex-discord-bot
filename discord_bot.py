@@ -90,3 +90,13 @@ def send_signal(pair, direction, entry, sl, tp):
     }
 
     requests.post(WEBHOOK_URL, json=data)
+
+def send_bot_status():
+
+    now = datetime.datetime.utcnow()
+
+    message = {
+        "content": f"🟢 **Forex Bot Running**\nTime: {now} UTC\nScanning market..."
+    }
+
+    requests.post(WEBHOOK_URL, json=message)
