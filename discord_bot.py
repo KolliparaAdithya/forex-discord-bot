@@ -95,8 +95,12 @@ def send_bot_status():
 
     now = datetime.datetime.utcnow()
 
+    # Send only once per day at 00:00 UTC
+    if now.hour != 0 or now.minute > 5:
+        return
+
     message = {
-        "content": f"🟢 **Forex Bot Running**\nTime: {now} UTC\nScanning market..."
+        "content": f"🟢 **Forex Bot Active**\nDate: {now.date()} UTC\nBot is running and scanning the market."
     }
 
-    requests.post(WEBHOOK_URL, json=message)
+    requests.post(WEBHOOK_URL, json=data)
