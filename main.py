@@ -1,7 +1,7 @@
 import schedule
 import time
 import datetime
-
+from discord_bot import send_bot_status
 from data_fetcher import get_data
 from indicators import add_indicators
 from strategy import check_signal
@@ -90,7 +90,7 @@ print(" Forex AI Signal Bot Started 🚀")
 print(" GitHub Scheduled Execution")
 print("===================================")
 
-scan_market()
+send_bot_status()
 
 
 # Run immediately once
