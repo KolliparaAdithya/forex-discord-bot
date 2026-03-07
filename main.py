@@ -1,15 +1,11 @@
-import schedule
-import time
 import datetime
-from discord_bot import send_bot_status
+from discord_bot import send_bot_status, send_signal
 from data_fetcher import get_data
 from indicators import add_indicators
 from strategy import check_signal
-from discord_bot import send_signal
 from risk_manager import can_take_trade, record_trade
 from session_filter import is_trading_session
 from stats import record_signal
-
 
 pairs = ["XAU/USD", "EUR/USD", "GBP/USD"]
 
@@ -54,7 +50,6 @@ def scan_market():
         m15 = add_indicators(m15)
         m5 = add_indicators(m5)
 
-        # Strategy check
         signal = check_signal(h4, h1, m15, m5)
 
         if signal:
@@ -81,10 +76,6 @@ def scan_market():
             record_signal()
 
 
-# Run every 30 seconds
-schedule.every(30).seconds.do(scan_market)
-
-
 print("===================================")
 print(" Forex AI Signal Bot Started 🚀")
 print(" GitHub Scheduled Execution")
@@ -92,6 +83,4 @@ print("===================================")
 
 send_bot_status()
 
-
-# Run immediately once
 scan_market()
