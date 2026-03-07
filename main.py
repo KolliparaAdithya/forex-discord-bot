@@ -87,16 +87,11 @@ schedule.every(30).seconds.do(scan_market)
 
 print("===================================")
 print(" Forex AI Signal Bot Started 🚀")
-print(" Bot is running successfully")
-print(" Multi-Timeframe Strategy Enabled")
-print(" H4 → H1 → M15 → M5 Analysis")
+print(" GitHub Scheduled Execution")
 print("===================================")
+
+scan_market()
 
 
 # Run immediately once
 scan_market()
-
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
