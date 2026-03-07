@@ -104,3 +104,21 @@ def send_bot_status():
     }
 
     requests.post(WEBHOOK_URL, json=data)
+    def send_daily_report(signals, wins, losses):
+
+    if signals == 0:
+        winrate = 0
+    else:
+        winrate = round((wins / signals) * 100, 2)
+
+    message = {
+        "content": f"""📊 **Daily Forex Bot Report**
+
+    Signals Sent: {signals}
+    Wins: {wins}
+    Losses: {losses}
+    Win Rate: {winrate}%
+    """
+    }
+
+    requests.post(WEBHOOK_URL, json=data)
