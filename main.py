@@ -1,13 +1,12 @@
 import datetime
-from discord_bot import send_bot_status, send_signal
+
+from discord_bot import send_bot_status, send_daily_report, send_signal
 from data_fetcher import get_data
 from indicators import add_indicators
 from strategy import check_signal
 from risk_manager import can_take_trade, record_trade
 from session_filter import is_trading_session
 from stats import record_signal
-from stats import get_daily_stats
-from discord_bot import send_daily_report
 
 pairs = ["XAU/USD", "EUR/USD", "GBP/USD"]
 
@@ -16,12 +15,10 @@ def scan_market():
 
     today = datetime.datetime.today().weekday()
 
-    # Skip weekends
     if today >= 5:
         print("Weekend detected - Forex market closed")
         return
 
-    # Check trading session
     if not is_trading_session():
         print("Outside trading session")
         return
@@ -36,7 +33,6 @@ def scan_market():
             print("Daily trade limit reached")
             return
 
-        # Fetch multi-timeframe data
         h4 = get_data(pair, "4h")
         h1 = get_data(pair, "1h")
         m15 = get_data(pair, "15min")
@@ -46,7 +42,6 @@ def scan_market():
             print("Data fetch failed")
             continue
 
-        # Add indicators
         h4 = add_indicators(h4)
         h1 = add_indicators(h1)
         m15 = add_indicators(m15)
@@ -83,13 +78,14 @@ print(" Forex AI Signal Bot Started 🚀")
 print(" GitHub Scheduled Execution")
 print("===================================")
 
-send_bot_status()
-
-scan_market()
 now = datetime.datetime.utcnow()
 
-if now.hour == 23 and now.minute < 5:
+# Send bot active message once per day
+if now.hour == 0 and now.minute < 5:
+    send_bot_status()
 
-    signals, wins, losses = get_daily_stats()
+# Send daily report
+if now.hour == 23 and now.minute > 55:
+    send_daily_report()
 
-    send_daily_report(signals, wins, losses)
+scan_market()
