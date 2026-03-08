@@ -1,7 +1,7 @@
 import requests
 import datetime
 
-WEBHOOK_URL = "https://discordapp.com/api/webhooks/1479778230251819091/iHY2s0wCdxZJcyoo9EbJ9rh9vaWjcQ1RY7Ea8b-q9YGhK0JTIh6EIeFKft-qGy4QLS6O"
+WEBHOOK_URL = "https://discordapp.com/api/webhooks/1480125624495505510/lA396_vobirPR2OsdeRSQHUfnGgIOFQvczLj2MxI5GfYCyx7w9hzh80n1etTDgL6mCjv"
 
 
 def get_session():
