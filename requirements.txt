@@ -1,6 +1,6 @@
+requests
 pandas
 numpy
-requests
 schedule
 ta
 apscheduler
