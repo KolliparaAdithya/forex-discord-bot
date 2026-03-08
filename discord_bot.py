@@ -90,35 +90,26 @@ def send_signal(pair, direction, entry, sl, tp):
     }
 
     requests.post(WEBHOOK_URL, json=data)
-
 def send_bot_status():
-
     now = datetime.datetime.utcnow()
-
-    # Send only once per day at 00:00 UTC
     if now.hour != 0 or now.minute > 5:
         return
-
-    message = {
+    data = {
         "content": f"🟢 **Forex Bot Active**\nDate: {now.date()} UTC\nBot is running and scanning the market."
     }
-
     requests.post(WEBHOOK_URL, json=data)
-    def send_daily_report(signals, wins, losses):
 
+def send_daily_report(signals, wins, losses):
     if signals == 0:
         winrate = 0
     else:
         winrate = round((wins / signals) * 100, 2)
-
-    message = {
+    data = {
         "content": f"""📊 **Daily Forex Bot Report**
-
-    Signals Sent: {signals}
-    Wins: {wins}
-    Losses: {losses}
-    Win Rate: {winrate}%
+Signals Sent: {signals}
+Wins: {wins}
+Losses: {losses}
+Win Rate: {winrate}%
     """
     }
-
     requests.post(WEBHOOK_URL, json=data)
