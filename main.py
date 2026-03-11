@@ -8,7 +8,18 @@ from risk_manager import can_take_trade, record_trade
 from session_filter import is_trading_session
 from stats import record_signal
 
-pairs = ["XAU/USD", "EUR/USD", "GBP/USD"]
+pairs = [
+"XAU/USD",
+"EUR/USD",
+"GBP/USD",
+"USD/JPY",
+"AUD/USD",
+"USD/CAD",
+"NZD/USD",
+"EUR/JPY",
+"GBP/JPY",
+"AUD/JPY"
+]
 
 
 def scan_market():
